@@ -34,16 +34,6 @@ module.exports = (robot) ->
         .get() (err, res, body) ->
           msg.send("/code ```#{body}```")
 
-  spotLite = (msg, alias) ->
-      msg.send("Getting the query details of index spot-lite")
-      data = {"query":{"bool":{"must":[{"terms":{"Network.raw":["ABC"]}},{"term":{"Daypart.raw":"CABLE PRESS PRIME"}},{"range":{"Year":{"gte": "2008","lte": "2017"}}}]}},"aggs":{"group_by_Network":{"terms":{"field": "Network.raw","size":0},"aggs":{"group_by_Year":{"terms": { "field": "Year","size": 0},"aggs":{"SumOfDur":{"sum":{"field": "LSDur"}},"SumOfImpression":{"sum":{"script":"doc['LSDur'].value * doc['LSP18-49Imps'].value"}},"SumOfUE":{"sum":{ "script": "doc['LSDur'].value * doc['LSP18-49UE'].value"}}}}}}},"size": 0}
-
-      json = JSON.stringify(data)
-      msg.http("http://<IP>:9200/spot-lite/networkRatings/_search")
-        .get(json) (err, res, body) ->
-          json1 = JSON.stringify(JSON.parse(body),null,2);
-          msg.send("/code ```#{json1}\n```")
-
   catNodes = (msg) ->
       msg.send("Getting the list of nodes for the cluster:")
       msg.http("http://<IP>:9200/_cat/nodes?v")
@@ -198,12 +188,3 @@ module.exports = (robot) ->
 
     enableAllocation msg, msg.match[1], (text) ->
       msg.send text
-
-  robot.hear /spot-lite/i, (msg) ->
-    if msg.message.user.id is robot.name
-      return
-
-    spotLite msg, msg.match[1], (text) ->
-      msg.send(text)
-
-
