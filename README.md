@@ -10,7 +10,7 @@ In hubot project repo, run:
 
 npm install hubot-elastic --save
 
-Then add hubot-etcd to your external-scripts.json:
+Then add hubot-elastic to your external-scripts.json:
 
 ```
 [
