@@ -7,10 +7,10 @@
   "keywords": "hubot, hubot-scripts, elasticsearch",
   "repository": {
     "type": "git",
-    "url": "git://github.com/stack72/hubot-elasticsearch.git"
+    "url": "git://github.com/Akhilesh-Anb/hubot-elastic.git"
   },
   "bugs": {
-    "url": "https://github.com/stack72/hubot-elasticsearch/issues"
+    "url": "https://github.com/Akhilesh-Anb/hubot-elastic/issues"
   },
   "dependencies": {
     "querystring": "0.2.x"
